@@ -12,7 +12,7 @@
 2. Tweets
         -> Creating
             -> Text?
-            -> Image?
+            -> Image -> Media Storage Server
         -> Delete
         -> Retweeting
 3. Following / Followers
