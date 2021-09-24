@@ -13,15 +13,21 @@ def tweet_detail_view(request, tweet_id, *args, **kwargs):
     Consume by Javascript
     return json data
     """
-    try:
-        obj = Tweet.objects.get(id=tweet_id)
-    except:
-        raise Http404
-    # return HttpResponse(f"<h1>Hello {tweet_id} - {obj.content}!<h1>")
-    
 
-    data = {
-
+     data = {
+        "id": tweet_id,
+        
+        #"image_path": obj.image.url
     }
 
-    return JsonResponse(data)
+    status = 200
+
+    try:
+        obj = Tweet.objects.get(id=tweet_id)
+        data['content'] = obj.content
+    except:
+        data['message'] = "Not found"
+        status = 404
+    # return HttpResponse(f"<h1>Hello {tweet_id} - {obj.content}!<h1>")
+
+    return JsonResponse(data, status=status) # json.dumps content_type='application/json'
